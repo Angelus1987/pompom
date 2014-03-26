@@ -31,6 +31,9 @@ Template.pomegranatesList.helpers({
        
        Pomegranates.insert(pomegranate);
      },
+     'click .delete' : function (e) {
+      Pomegranates.remove(this._id);
+     }
    });
  }
 
