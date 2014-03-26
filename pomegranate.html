@@ -1,0 +1,30 @@
+<head>
+  <title>pomegranate</title>
+</head>
+
+<body>
+  {{> hello}}
+
+  {{> pomegranatesList}}
+</body>
+
+<template name="hello">
+  <h1>Hello World!</h1>
+  {{greeting}}
+  <input type="button" value="Click" />
+</template>
+
+<template name="pomegranatesList">
+	<h2>Pomegranates</h2>
+	<form id="new-pomegranate">
+    <input type="text" name="goal" placeholder="Goal or name of the task"/>
+     <input type="submit" value="Start"/>
+  </form>
+   <ul>
+     {{#each allPomegranates}}
+      <li>
+         {{startDate}} - {{goal}}
+       </li>
+     {{/each}}
+   </ul>
+</template>
