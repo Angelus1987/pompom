@@ -2,7 +2,7 @@ Pomegranates = new Meteor.Collection("Pomegranates", {}); //global variable
 
 if (Meteor.isClient) {
   Template.hello.greeting = function () {
-    return "Welcome to pomegranate.";
+    return "Welcome to Pomegranate.";
   };
 
   Template.hello.events({
@@ -31,7 +31,8 @@ Template.pomegranatesList.helpers({
        
        Pomegranates.insert(pomegranate);
      },
-     'click .delete' : function (e) {
+
+     'click .delete' : function (e) { //event name is click; selector is anything with delete
       Pomegranates.remove(this._id);
      }
    });
