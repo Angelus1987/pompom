@@ -29,6 +29,7 @@ Template.pomegranatesList.helpers({
        e.preventDefault(); // don't reload the page like you would by default
                             // instead do some interesting stuff: 
        var pomegranate = {
+         userId: Meteor.user()._id, // user id added to document
          startDate: new Date(),
          goal: $(e.target).find('[name=goal]').val(),
        };
@@ -43,7 +44,17 @@ Template.pomegranatesList.helpers({
  }
 
 if (Meteor.isServer) {
+  // check to see if the appropriate user is signed in to the document
   Meteor.startup(function () {
+    var ownsDocument = function(userId, doc) {
+  return doc && doc.userId === userId;
+ }
+ // if current user matches the document, you are allowed to do these things
+ Pomegranates.allow({
+   insert: ownsDocument,
+   update: ownsDocument,
+   remove: ownsDocument,
+ });
     // code to run on server at startup
   });
 }

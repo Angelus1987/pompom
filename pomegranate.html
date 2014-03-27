@@ -20,15 +20,19 @@
 
 <template name="pomegranatesList">
 	<h2>Pomegranates</h2>
-	<form id="new-pomegranate">
-    <input type="text" name="goal" placeholder="Goal or name of the task"/>
-     <input type="submit" value="Start"/>
+	{{#if currentUser}}
+		<form id="new-pomegranate">
+	    <input type="text" name="goal" placeholder="Goal or name of the task"/>
+	    <input type="submit" value="Start"/>
+     {{/if}}
   </form>
    <ul>
      {{#each allPomegranates}}
       <li>
          {{startDate}} - {{goal}}
-         <input type="button" value="Delete" class="delete"/>
+         {{#if currentUser}}
+             <input type="button" value="Delete" class="delete"/>
+         {{/if}}
        </li>
      {{/each}}
    </ul>
