@@ -5,6 +5,8 @@ if (Meteor.isClient) {
    passwordSignupFields: 'USERNAME_AND_EMAIL'
   });
 
+  Meteor.subscribe('pomegranates'); //matches what's in publish in isServer. define what gets synced to browser.
+
   Template.hello.greeting = function () {
     return "Welcome to Pomegranate.";
   };
@@ -44,6 +46,10 @@ Template.pomegranatesList.helpers({
  }
 
 if (Meteor.isServer) {
+  // necessary because autopublish was removed
+ Meteor.publish("pomegranates", function (){
+  return Pomegranates.find({}, {sort: {startDate: -1}}); //return result of this query. define what gets synced to browser.
+ });
   // check to see if the appropriate user is signed in to the document
   Meteor.startup(function () {
     var ownsDocument = function(userId, doc) {
